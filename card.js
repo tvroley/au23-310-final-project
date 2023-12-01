@@ -36,9 +36,12 @@ window.addEventListener('load', function() {
     for(let i = 0; i < cards.length; i++) {
         const currentCard = cards[i];
         const imageEl = document.createElement('img');
-        const divEl = this.document.createElement('div');
+        const divEl = document.createElement('div');
+        const pEl = document.createElement('p');
+        pEl.innerText = currentCard.toString();
         imageEl.src = currentCard.gradedCardImageLink;
         divEl.appendChild(imageEl);
+        divEl.appendChild(pEl);
         cardsContainerEl.appendChild(divEl);
     }
 });
