@@ -32,12 +32,14 @@ const cards = [
 ];
 
 window.addEventListener('load', function() {
-    const divEl = document.getElementById('cards-container');
+    const cardsContainerEl = document.getElementById('cards-container');
     for(let i = 0; i < cards.length; i++) {
         const currentCard = cards[i];
         const imageEl = document.createElement('img');
+        const divEl = this.document.createElement('div');
         imageEl.src = currentCard.gradedCardImageLink;
         divEl.appendChild(imageEl);
+        cardsContainerEl.appendChild(divEl);
     }
 });
 
