@@ -13,12 +13,13 @@ class Card {
 }
 
 class GradedCard extends Card {
-    constructor(year, brand, cardSet, cardNumber, player, gradingCompany, grade, certificationNumber, gradedCardImageLink) {
+    constructor(year, brand, cardSet, cardNumber, player, gradingCompany, grade, certificationNumber, frontCardImageLink, backCardImageLink) {
         super(year, brand, cardSet, cardNumber, player);
         this.gradingCompany = gradingCompany;
         this.grade = grade;
         this.certificationNumber = certificationNumber;
-        this.gradedCardImageLink = gradedCardImageLink;
+        this.frontCardImageLink = frontCardImageLink;
+        this.backCardImageLink = backCardImageLink;
     }
 
     toString() {
@@ -27,20 +28,23 @@ class GradedCard extends Card {
 }
 
 const cards = [
-    new GradedCard(1958, 'Topps', '1958 Topps', 62, 'Jim Brown', 'PSA', '4', '67733031', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/132113359/TyLJOT5i7ka5C-qOUAjc-w.jpg'),
-    new GradedCard(1963, 'Fleer', '1963 Fleer', '', 'Checklist 1-66', 'PSA', '5', '69683152', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/134162925/rhz8nxNC_EG5HFJZW6L6PQ.jpg')
+    new GradedCard(1958, 'Topps', '1958 Topps', 62, 'Jim Brown', 'PSA', '4', '67733031', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/132113359/TyLJOT5i7ka5C-qOUAjc-w.jpg', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/132113359/9Lz9EJNkUU-0ut5gtBhkeg.jpg'),
+    new GradedCard(1963, 'Fleer', '1963 Fleer', '', 'Checklist 1-66', 'PSA', '5', '69683152', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/134162925/rhz8nxNC_EG5HFJZW6L6PQ.jpg', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/134162925/kMfM2yjrjE2q0AJNQU2OCA.jpg')
 ];
 
 window.addEventListener('load', function() {
     const cardsContainerEl = document.getElementById('cards-container');
     for(let i = 0; i < cards.length; i++) {
         const currentCard = cards[i];
-        const imageEl = document.createElement('img');
+        const frontImageEl = document.createElement('img');
+        const backImageEl = document.createElement('img');
         const divEl = document.createElement('div');
         const pEl = document.createElement('p');
         pEl.innerText = currentCard.toString();
-        imageEl.src = currentCard.gradedCardImageLink;
-        divEl.appendChild(imageEl);
+        frontImageEl.src = currentCard.frontCardImageLink;
+        backImageEl.src = currentCard.backCardImageLink;
+        divEl.appendChild(frontImageEl);
+        divEl.appendChild(backImageEl);
         divEl.appendChild(pEl);
         cardsContainerEl.appendChild(divEl);
     }
