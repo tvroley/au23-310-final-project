@@ -34,9 +34,7 @@ window.addEventListener('load', function() {
     const currentCard = cards[0];
     const divEl = document.getElementById('cards-container');
     const imageEl = document.createElement('img');
-    debugger;
     imageEl.src = currentCard.gradedCardImageLink;
-    debugger;
     divEl.appendChild(imageEl);
 });
 
