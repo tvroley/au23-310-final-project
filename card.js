@@ -27,14 +27,17 @@ class GradedCard extends Card {
 }
 
 const cards = [
-    new GradedCard(1958, 'Topps', '1958 Topps', 62, 'Jim Brown', 'PSA', '4', '67733031', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/132113359/TyLJOT5i7ka5C-qOUAjc-w.jpg')
+    new GradedCard(1958, 'Topps', '1958 Topps', 62, 'Jim Brown', 'PSA', '4', '67733031', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/132113359/TyLJOT5i7ka5C-qOUAjc-w.jpg'),
+    new GradedCard(1963, 'Fleer', '1963 Fleer', '', 'Checklist 1-66', 'PSA', '5', '69683152', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/134162925/rhz8nxNC_EG5HFJZW6L6PQ.jpg')
 ];
 
 window.addEventListener('load', function() {
-    const currentCard = cards[0];
     const divEl = document.getElementById('cards-container');
-    const imageEl = document.createElement('img');
-    imageEl.src = currentCard.gradedCardImageLink;
-    divEl.appendChild(imageEl);
+    for(let i = 0; i < cards.length; i++) {
+        const currentCard = cards[i];
+        const imageEl = document.createElement('img');
+        imageEl.src = currentCard.gradedCardImageLink;
+        divEl.appendChild(imageEl);
+    }
 });
 
