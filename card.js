@@ -60,9 +60,9 @@ window.addEventListener('load', function() {
             divEl.classList.add('unsold');
             soldCheckBox.checked = false;
         }
+        divEl.appendChild(pEl);
         divEl.appendChild(frontImageEl);
         divEl.appendChild(backImageEl);
-        divEl.appendChild(pEl);
         divEl.appendChild(soldCheckBoxLabel);
         divEl.appendChild(soldCheckBox);
         soldCheckBox.addEventListener('change', function(e) {

@@ -3,11 +3,11 @@ img {
   }
 
 .sold{
-    border: 2px solid blue;
+    border: 3px solid blue;
     background-color:  rgba(0, 204, 255, 0.126);
 }
 
 .unsold{
-    border: 2px solid gray;
+    border: 3px solid gray;
     background-color: rgba(128, 128, 128, 0.186);
 }
