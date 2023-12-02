@@ -1,3 +1,7 @@
 img {
     max-width: 300px;
   }
+
+.sold{
+    background-color: rgb(0, 204, 255);
+}
