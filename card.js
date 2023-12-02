@@ -43,15 +43,38 @@ window.addEventListener('load', function() {
         const backImageEl = document.createElement('img');
         const divEl = document.createElement('div');
         const pEl = document.createElement('p');
+        const soldCheckBox = document.createElement('input');
+        soldCheckBoxId = `sold-checbox-${currentCard.certificationNumber}`;
+        soldCheckBox.setAttribute('id', soldCheckBoxId);
+        const soldCheckBoxLabel = document.createElement('label');
+        soldCheckBoxLabel.setAttribute('for', soldCheckBoxId);
+        soldCheckBoxLabel.innerText = 'Sold';
+        soldCheckBox.setAttribute('type', 'checkbox');
         pEl.innerText = currentCard.toString();
         frontImageEl.src = currentCard.frontCardImageLink;
         backImageEl.src = currentCard.backCardImageLink;
         if(currentCard.sold) {
             divEl.classList.add('sold');
+            soldCheckBox.checked = true;
+        } else {
+            divEl.classList.add('unsold');
+            soldCheckBox.checked = false;
         }
         divEl.appendChild(frontImageEl);
         divEl.appendChild(backImageEl);
         divEl.appendChild(pEl);
+        divEl.appendChild(soldCheckBoxLabel);
+        divEl.appendChild(soldCheckBox);
+        soldCheckBox.addEventListener('change', function(e) {
+            e.stopPropagation();
+            if(soldCheckBox.checked) {
+                soldCheckBox.parentElement.classList.add('sold');
+                soldCheckBox.parentElement.classList.remove('unsold');
+            } else {
+                soldCheckBox.parentElement.classList.remove('sold');
+                soldCheckBox.parentElement.classList.add('unsold');
+            }
+        });
         cardsContainerEl.appendChild(divEl);
     }
 });
