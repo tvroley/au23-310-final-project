@@ -1,3 +1,4 @@
+// create api-key.js file with const API_KEY="your_api_key" in this same directory
 class Card {
     constructor(year, brand, cardSet, cardNumber, player) {
         this.year = year;
@@ -46,7 +47,7 @@ window.addEventListener('load', function() {
         const divEl = document.createElement('div');
         const pEl = document.createElement('p');
         const soldCheckBox = document.createElement('input');
-        soldCheckBoxId = `sold-checbox-${currentCard.certificationNumber}`;
+        const soldCheckBoxId = `sold-checbox-${currentCard.certificationNumber}`;
         soldCheckBox.setAttribute('id', soldCheckBoxId);
         const soldCheckBoxLabel = document.createElement('label');
         soldCheckBoxLabel.setAttribute('for', soldCheckBoxId);
@@ -77,7 +78,24 @@ window.addEventListener('load', function() {
                 soldCheckBox.parentElement.classList.add('unsold');
             }
         });
+
         cardsContainerEl.appendChild(divEl);
     }
+    const BASE_URL = 'https://api.nytimes.com/svc/search/v2/articlesearch.json';
+    const url = `${BASE_URL}?q=topps+fanatics&api-key=${API_KEY}`;
+    fetch(url).then(function(data) {
+        return data.json();
+    })
+    .then(function(responseJson) {
+        console.log(responseJson);
+        if(responseJson.response.docs[0]) {
+            const headline = responseJson.response.docs[0].headline.print_headline;
+            const headlineEl = document.createElement('p');
+            headlineEl.innerText = `Sports Cards News: ${headline}`;
+            cardsContainerEl.insertAdjacentElement('beforebegin', headlineEl);
+        }
+    }).catch(function(err) {
+        console.log(err);
+        return 'No news';
+    });
 });
-
