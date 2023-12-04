@@ -38,49 +38,79 @@ const cards = [
     new GradedCard(1963, 'Fleer', '1963 Fleer', 42, 'Sandy Koufax', 'PSA', '7', '69683156', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/134162929/q3qD0HtaX06lU8JgGyMcFw.jpg', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/134162929/_IMzMlcTKUewWSio8Gr6RA.jpg', true)
 ];
 
+const castToGradedCard = function(card) {
+    return Object.assign(new GradedCard(), card);
+}
+
 window.addEventListener('load', function() {
     const cardsContainerEl = document.getElementById('cards-container');
-    for(let i = 0; i < cards.length; i++) {
-        const currentCard = cards[i];
-        const frontImageEl = document.createElement('img');
-        const backImageEl = document.createElement('img');
-        const divEl = document.createElement('div');
-        const pEl = document.createElement('p');
-        const soldCheckBox = document.createElement('input');
-        const soldCheckBoxId = `sold-checbox-${currentCard.certificationNumber}`;
-        soldCheckBox.setAttribute('id', soldCheckBoxId);
-        const soldCheckBoxLabel = document.createElement('label');
-        soldCheckBoxLabel.setAttribute('for', soldCheckBoxId);
-        soldCheckBoxLabel.innerText = 'Sold';
-        soldCheckBox.setAttribute('type', 'checkbox');
-        pEl.innerText = currentCard.toString();
-        frontImageEl.src = currentCard.frontCardImageLink;
-        backImageEl.src = currentCard.backCardImageLink;
-        if(currentCard.sold) {
-            divEl.classList.add('sold');
-            soldCheckBox.checked = true;
-        } else {
-            divEl.classList.add('unsold');
-            soldCheckBox.checked = false;
-        }
-        divEl.appendChild(pEl);
-        divEl.appendChild(frontImageEl);
-        divEl.appendChild(backImageEl);
-        divEl.appendChild(soldCheckBoxLabel);
-        divEl.appendChild(soldCheckBox);
-        soldCheckBox.addEventListener('change', function(e) {
-            e.stopPropagation();
-            if(soldCheckBox.checked) {
-                soldCheckBox.parentElement.classList.add('sold');
-                soldCheckBox.parentElement.classList.remove('unsold');
+    const loadCardsContainer = function(myCards) {
+        for(let i = 0; i < myCards.length; i++) {
+            const currentCard = myCards[i];
+            const frontImageEl = document.createElement('img');
+            const backImageEl = document.createElement('img');
+            const divEl = document.createElement('div');
+            const pEl = document.createElement('p');
+            const soldCheckBox = document.createElement('input');
+            const soldCheckBoxId = `sold-checbox-${currentCard.certificationNumber}`;
+            soldCheckBox.setAttribute('id', soldCheckBoxId);
+            const soldCheckBoxLabel = document.createElement('label');
+            soldCheckBoxLabel.setAttribute('for', soldCheckBoxId);
+            soldCheckBoxLabel.innerText = 'Sold';
+            soldCheckBox.setAttribute('type', 'checkbox');
+            pEl.innerText = currentCard.toString();
+            frontImageEl.src = currentCard.frontCardImageLink;
+            backImageEl.src = currentCard.backCardImageLink;
+            if(currentCard.sold) {
+                divEl.classList.add('sold');
+                soldCheckBox.checked = true;
             } else {
-                soldCheckBox.parentElement.classList.remove('sold');
-                soldCheckBox.parentElement.classList.add('unsold');
+                divEl.classList.add('unsold');
+                soldCheckBox.checked = false;
             }
-        });
+            divEl.appendChild(pEl);
+            divEl.appendChild(frontImageEl);
+            divEl.appendChild(backImageEl);
+            divEl.appendChild(soldCheckBoxLabel);
+            divEl.appendChild(soldCheckBox);
+            soldCheckBox.addEventListener('change', function(e) {
+                e.stopPropagation();
+                if(soldCheckBox.checked) {
+                    soldCheckBox.parentElement.classList.add('sold');
+                    soldCheckBox.parentElement.classList.remove('unsold');
+                } else {
+                    soldCheckBox.parentElement.classList.remove('sold');
+                    soldCheckBox.parentElement.classList.add('unsold');
+                }
+            });
 
-        cardsContainerEl.appendChild(divEl);
+            cardsContainerEl.appendChild(divEl);
+        }
     }
+    loadCardsContainer(cards);
+    const container = document.getElementsByClassName('container')[0];
+    const saveButton = document.createElement('button');
+    saveButton.innerText = 'Save';
+    saveButton.setAttribute('type', 'button');
+    container.insertAdjacentElement('beforebegin', saveButton);
+    saveButton.addEventListener('click', function(event) {
+        const cardsWord = JSON.stringify(cards);
+        localStorage.setItem('cards', cardsWord);
+    });
+
+    const loadButton = document.createElement('button');
+    loadButton.innerText = 'Load';
+    loadButton.setAttribute('type', 'button');
+    saveButton.insertAdjacentElement('afterend', loadButton);
+    loadButton.addEventListener('click', function(event) {
+        const cardsWord = localStorage.getItem('cards');
+        if(cardsWord) {
+            cardsContainerEl.innerHTML = '';
+            let myCards = JSON.parse(cardsWord);
+            myCards = myCards.map(castToGradedCard);
+            loadCardsContainer(myCards);
+        }
+    });
     const BASE_URL = 'https://api.nytimes.com/svc/search/v2/articlesearch.json';
     const url = `${BASE_URL}?q=topps+fanatics&api-key=${API_KEY}`;
     fetch(url).then(function(data) {
@@ -98,8 +128,4 @@ window.addEventListener('load', function() {
         console.log(err);
         return 'No news';
     });
-
-    const saveButton = document.createElement('button');
-    saveButton.innerText = 'Save';
-    cardsContainerEl.insertAdjacentElement('afterbegin', saveButton);
 });
