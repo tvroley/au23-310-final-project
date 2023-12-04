@@ -98,4 +98,8 @@ window.addEventListener('load', function() {
         console.log(err);
         return 'No news';
     });
+
+    const saveButton = document.createElement('button');
+    saveButton.innerText = 'Save';
+    cardsContainerEl.insertAdjacentElement('afterbegin', saveButton);
 });
