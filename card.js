@@ -50,6 +50,7 @@ window.addEventListener('load', function() {
             const frontImageEl = document.createElement('img');
             const backImageEl = document.createElement('img');
             const divEl = document.createElement('div');
+            divEl.setAttribute('cardIndex', i);
             const pEl = document.createElement('p');
             const soldCheckBox = document.createElement('input');
             const soldCheckBoxId = `sold-checbox-${currentCard.certificationNumber}`;
@@ -94,6 +95,10 @@ window.addEventListener('load', function() {
     saveButton.setAttribute('type', 'button');
     container.insertAdjacentElement('beforebegin', saveButton);
     saveButton.addEventListener('click', function(event) {
+        for(let i = 0; i < cards.length; i++) {
+            const soldCheckBox = document.getElementById(`sold-checbox-${cards[i].certificationNumber}`);
+            cards[i].sold = soldCheckBox.checked;
+        }
         const cardsWord = JSON.stringify(cards);
         localStorage.setItem('cards', cardsWord);
     });
