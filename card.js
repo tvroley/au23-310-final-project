@@ -27,6 +27,10 @@ class GradedCard extends Card {
     toString() {
         return super.toString() + ` ${this.gradingCompany} ${this.grade} certification number: ${this.certificationNumber}`;
     }
+
+    static castToGradedCard(card) {
+        return Object.assign(new GradedCard(), card);
+    }
 }
 
 const cards = [
@@ -37,10 +41,6 @@ const cards = [
     new GradedCard(1964, 'Topps', '1965 Topps', 300, 'Sandy Koufax', 'PSA', '7', '69683155', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/134162928/9B6T1van80ywyrrCHCk-Ow.jpg', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/134162928/_elZEpRT0Ee-et4nv4LMkw.jpg', true),
     new GradedCard(1963, 'Fleer', '1963 Fleer', 42, 'Sandy Koufax', 'PSA', '7', '69683156', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/134162929/q3qD0HtaX06lU8JgGyMcFw.jpg', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/134162929/_IMzMlcTKUewWSio8Gr6RA.jpg', true)
 ];
-
-const castToGradedCard = function(card) {
-    return Object.assign(new GradedCard(), card);
-}
 
 window.addEventListener('load', function() {
     const cardsContainerEl = document.getElementById('cards-container');
@@ -112,17 +112,17 @@ window.addEventListener('load', function() {
         if(cardsWord) {
             cardsContainerEl.innerHTML = '';
             let myCards = JSON.parse(cardsWord);
-            myCards = myCards.map(castToGradedCard);
+            myCards = myCards.map(GradedCard.castToGradedCard);
             loadCardsContainer(myCards);
         }
     });
+
     const BASE_URL = 'https://api.nytimes.com/svc/search/v2/articlesearch.json';
     const url = `${BASE_URL}?q=topps+fanatics&api-key=${API_KEY}`;
     fetch(url).then(function(data) {
         return data.json();
     })
     .then(function(responseJson) {
-        console.log(responseJson);
         if(responseJson.response.docs[0]) {
             const headline = responseJson.response.docs[0].headline.print_headline;
             const headlineEl = document.createElement('p');
