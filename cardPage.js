@@ -12,6 +12,7 @@ let cards = [
 
 window.addEventListener('load', function() {
     const cardsContainerEl = document.getElementById('cards-container');
+    const cardFormEl = document.getElementById('card-form');
     const loadCardsContainer = function(myCards) {
         for(let i = 0; i < myCards.length; i++) {
             const currentCard = myCards[i];
@@ -105,7 +106,7 @@ window.addEventListener('load', function() {
             const headline = responseJson.response.docs[0].headline.print_headline;
             const headlineEl = document.createElement('p');
             headlineEl.innerText = `Sports Cards News: ${headline}`;
-            cardsContainerEl.insertAdjacentElement('beforebegin', headlineEl);
+            cardFormEl.insertAdjacentElement('beforebegin', headlineEl);
         }
     }).catch(function(err) {
         console.log(err);
