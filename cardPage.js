@@ -14,8 +14,17 @@ window.addEventListener('load', function() {
     const cardsContainerEl = document.getElementById('cards-container');
     const cardFormEl = document.getElementById('card-form');
     const yearEl = document.getElementById('year');
+    const brandEl = document.getElementById('brand');
+    const setEl = document.getElementById('card-set');
+    const numberEl = document.getElementById('card-number');
+    const playerEl = document.getElementById('player');
+    const gradingCompanyEl = document.getElementById('grading-company');
+    const gradeEl = document.getElementById('grade');
+    const certificationEl = document.getElementById('certification-number');
+    const frontImageEl = document.getElementById('front-image-link');
+    const backImageEl = document.getElementById('back-image-link');
     const validateYear = function(input) {
-        const re = /(19|20)\d{2}/;
+        const re = /(18|19|20)\d{2}/;
         const year = input.value.trim();
         if(re.test(year)) {
             input.parentElement.classList.remove("invalid");
@@ -111,6 +120,22 @@ window.addEventListener('load', function() {
     cardFormEl.addEventListener("submit", (e) => {
         if (!(validateYear(yearEl))) {
             e.preventDefault();
+        } else {
+            const year = yearEl.value.trim();
+            const brand = brandEl.value.trim();
+            const cardSet = setEl.value.trim();
+            const cardNumber = numberEl.value.trim();
+            const player = playerEl.value.trim();
+            const gradingCompany = gradingCompanyEl.value.trim();
+            const grade = gradeEl.value.trim();
+            const certificationNumber = certificationEl.value.trim();
+            const frontCardImageLink = frontImageEl.value.trim();
+            const backCardImageLink = backImageEl.value.trim();
+            const currentCard = new GradedCard(year, brand, cardSet, cardNumber, player, gradingCompany, grade, certificationNumber, frontCardImageLink, backCardImageLink);
+            cards.push(currentCard);
+            loadCardsContainer(cards);
+            const cardsWord = JSON.stringify(cards);
+            localStorage.setItem('cards', cardsWord);
         }
     });
 
