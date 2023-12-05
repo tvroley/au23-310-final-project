@@ -39,7 +39,8 @@ const cards = [
     new GradedCard(1964, 'Topps', '1964 Topps', 125, 'Pete Rose', 'PSA', '5', '69683153', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/134162926/IGKIwryO9UGV5QIMbnzWPA.jpg', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/134162926/Oesmk-aEakO7OloQXa5yQA.jpg', true),
     new GradedCard(1964, 'Topps', '1964 Topps', 200, 'Sandy Koufax', 'PSA', '6', '69683154', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/134162927/fwKUq0ppJUuI8gFuTb8RYw.jpg', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/134162927/eDy2AmnvkkSEssUMz3XZoQ.jpg', true),
     new GradedCard(1964, 'Topps', '1965 Topps', 300, 'Sandy Koufax', 'PSA', '7', '69683155', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/134162928/9B6T1van80ywyrrCHCk-Ow.jpg', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/134162928/_elZEpRT0Ee-et4nv4LMkw.jpg', true),
-    new GradedCard(1963, 'Fleer', '1963 Fleer', 42, 'Sandy Koufax', 'PSA', '7', '69683156', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/134162929/q3qD0HtaX06lU8JgGyMcFw.jpg', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/134162929/_IMzMlcTKUewWSio8Gr6RA.jpg', true)
+    new GradedCard(1963, 'Fleer', '1963 Fleer', 42, 'Sandy Koufax', 'PSA', '7', '69683156', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/134162929/q3qD0HtaX06lU8JgGyMcFw.jpg', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/134162929/_IMzMlcTKUewWSio8Gr6RA.jpg', true),
+    new GradedCard(1962, 'Topps', '1962 Topps', 387, 'Lou Brock', 'PSA', '4', '69683157', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/134162930/OOMfCzB6nkK03AvutcPlCw.jpg', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/134162930/sHsCZ_9Nak-tA0pSpcClVw.jpg', true)
 ];
 
 window.addEventListener('load', function() {
