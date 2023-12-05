@@ -13,6 +13,18 @@ let cards = [
 window.addEventListener('load', function() {
     const cardsContainerEl = document.getElementById('cards-container');
     const cardFormEl = document.getElementById('card-form');
+    const yearEl = document.getElementById('year');
+    const validateYear = function(input) {
+        const re = /(19|20)\d{2}/;
+        const year = input.value.trim();
+        if(re.test(year)) {
+            input.parentElement.classList.remove("invalid");
+            return true;
+        } else {
+            input.parentElement.classList.add("invalid");
+            return false;
+        }
+    }
     const loadCardsContainer = function(myCards) {
         for(let i = 0; i < myCards.length; i++) {
             const currentCard = myCards[i];
@@ -94,6 +106,12 @@ window.addEventListener('load', function() {
     
     loadButton.addEventListener('click', function(event) {
         loadLocalStorageCards();
+    });
+
+    cardFormEl.addEventListener("submit", (e) => {
+        if (!(validateYear(yearEl))) {
+            e.preventDefault();
+        }
     });
 
     const BASE_URL = 'https://api.nytimes.com/svc/search/v2/articlesearch.json';
