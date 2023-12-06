@@ -1,4 +1,3 @@
-// create api-key.js file with const API_KEY="your_api_key" in this same directory
 window.addEventListener('load', function() {
     const cardsContainerEl = document.getElementById('cards-container');
     const cardFormEl = document.getElementById('card-form');
