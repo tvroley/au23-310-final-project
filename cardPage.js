@@ -106,6 +106,28 @@ window.addEventListener('load', function() {
         loadLocalStorageCards();
     });
 
+    const certSortButton = document.createElement('button');
+    certSortButton.innerText = 'Sort By Certification Number';
+    certSortButton.setAttribute('type', 'button');
+    loadButton.insertAdjacentElement('afterend', certSortButton);
+
+    certSortButton.addEventListener('click', (e) => {
+        cards.sort(GradedCard.compareCertification);
+        cardsContainerEl.innerHTML = '';
+        loadCardsContainer(cards);
+    });
+
+    const yearSortButton = document.createElement('button');
+    yearSortButton.innerText = 'Sort By Year';
+    yearSortButton.setAttribute('type', 'button');
+    certSortButton.insertAdjacentElement('afterend', yearSortButton);
+
+    yearSortButton.addEventListener('click', (e) => {
+        cards.sort(GradedCard.compareYear);
+        cardsContainerEl.innerHTML = '';
+        loadCardsContainer(cards);
+    });
+
     cardFormEl.addEventListener("submit", (e) => {
         if (!(validateYear(yearEl))) {
             e.preventDefault();

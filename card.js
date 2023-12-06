@@ -30,4 +30,12 @@ class GradedCard extends Card {
     static castToGradedCard(card) {
         return Object.assign(new GradedCard(), card);
     }
+
+    static compareCertification(cardA, cardB) {
+        return cardA.certificationNumber - cardB.certificationNumber;
+    }
+
+    static compareYear(cardA, cardB) {
+        return cardA.year - cardB.year;
+    }
 }
