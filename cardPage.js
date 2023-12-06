@@ -86,7 +86,7 @@ window.addEventListener('load', function() {
     const saveButton = document.createElement('button');
     saveButton.innerText = 'Save';
     saveButton.setAttribute('type', 'button');
-    container.insertAdjacentElement('beforebegin', saveButton);
+    cardsContainerEl.insertAdjacentElement('beforebegin', saveButton);
     
     saveButton.addEventListener('click', function(event) {
         for(let i = 0; i < cards.length; i++) {
@@ -100,7 +100,7 @@ window.addEventListener('load', function() {
     const loadButton = document.createElement('button');
     loadButton.innerText = 'Load';
     loadButton.setAttribute('type', 'button');
-    saveButton.insertAdjacentElement('afterend', loadButton);
+    cardsContainerEl.insertAdjacentElement('beforebegin', loadButton);
     
     loadButton.addEventListener('click', function(event) {
         loadLocalStorageCards();
@@ -109,7 +109,7 @@ window.addEventListener('load', function() {
     const certSortButton = document.createElement('button');
     certSortButton.innerText = 'Sort By Certification Number';
     certSortButton.setAttribute('type', 'button');
-    loadButton.insertAdjacentElement('afterend', certSortButton);
+    cardsContainerEl.insertAdjacentElement('beforebegin', certSortButton);
 
     certSortButton.addEventListener('click', (e) => {
         cards.sort(GradedCard.compareCertification);
@@ -120,7 +120,7 @@ window.addEventListener('load', function() {
     const yearSortButton = document.createElement('button');
     yearSortButton.innerText = 'Sort By Year';
     yearSortButton.setAttribute('type', 'button');
-    certSortButton.insertAdjacentElement('afterend', yearSortButton);
+    cardsContainerEl.insertAdjacentElement('beforebegin', yearSortButton);
 
     yearSortButton.addEventListener('click', (e) => {
         cards.sort(GradedCard.compareYear);
