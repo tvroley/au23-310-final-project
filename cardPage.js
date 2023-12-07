@@ -127,6 +127,17 @@ window.addEventListener('load', function() {
         loadCardsContainer(cards);
     });
 
+    const soldSortButton = document.createElement('button');
+    soldSortButton.innerText = 'Sort By Sold Status';
+    soldSortButton.setAttribute('type', 'button');
+    cardsContainerEl.insertAdjacentElement('beforebegin', soldSortButton);
+
+    soldSortButton.addEventListener('click', (e) => {
+        cards.sort(GradedCard.compareSold);
+        cardsContainerEl.innerHTML = '';
+        loadCardsContainer(cards);
+    });
+
     cardFormEl.addEventListener("submit", (e) => {
         if (!(validateYear(yearEl))) {
             e.preventDefault();
