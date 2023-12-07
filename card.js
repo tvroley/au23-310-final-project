@@ -38,4 +38,8 @@ class GradedCard extends Card {
     static compareYear(cardA, cardB) {
         return cardA.year - cardB.year;
     }
+
+    static compareSold(cardA, cardB) {
+        return cardA.sold - cardB.sold;
+    }
 }
