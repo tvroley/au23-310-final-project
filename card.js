@@ -10,6 +10,10 @@ class Card {
     toString() {
         return `${this.cardSet} #${this.cardNumber} ${this.player}`;
     }
+
+    static compareYear(cardA, cardB) {
+        return cardA.year - cardB.year;
+    }
 }
 
 class GradedCard extends Card {
@@ -33,10 +37,6 @@ class GradedCard extends Card {
 
     static compareCertification(cardA, cardB) {
         return cardA.certificationNumber - cardB.certificationNumber;
-    }
-
-    static compareYear(cardA, cardB) {
-        return cardA.year - cardB.year;
     }
 
     static compareSold(cardA, cardB) {
