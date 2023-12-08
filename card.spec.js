@@ -37,4 +37,10 @@ describe('Tests for the card class', () => {
         expect(cards[1].sold).toEqual(true);
         expect(cards[2].sold).toEqual(true);
     });
+
+    it('should return a string that describes the card', () => {
+        let maysCard = new GradedCard(1965, 'Topps', '1965 Topps', 250, 'Willie Mays', 'PSA', '6', '69683158', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/134162931/UquW7P2Yv0qrT3dULv41sg.jpg', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/134162931/YTk_a4fPJEqQEudsAlr8Lg.jpg', true);
+
+        expect(maysCard.toString()).toEqual(`1965 Topps #250 Willie Mays PSA 6 certification number: 69683158`);
+    });
 });
