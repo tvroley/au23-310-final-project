@@ -66,6 +66,13 @@ window.addEventListener('load', function() {
             cardsContainerEl.appendChild(divEl);
         }
     }
+    cardsContainerEl.addEventListener('click', function(event) {
+        event.stopPropagation();
+        const el = event.target;
+        if(el.tagName === 'IMG') {
+            window.open(el.src);
+        }
+    });
     const loadLocalStorageCards = function() {
         const cardsWord = localStorage.getItem('cards');
         if(cardsWord) {
@@ -87,6 +94,7 @@ window.addEventListener('load', function() {
     cardsContainerEl.insertAdjacentElement('beforebegin', saveButton);
     
     saveButton.addEventListener('click', function(event) {
+        event.stopPropagation();
         for(let i = 0; i < cards.length; i++) {
             const soldCheckBox = document.getElementById(`sold-checbox-${cards[i].certificationNumber}`);
             cards[i].sold = soldCheckBox.checked;
@@ -101,6 +109,7 @@ window.addEventListener('load', function() {
     cardsContainerEl.insertAdjacentElement('beforebegin', loadButton);
     
     loadButton.addEventListener('click', function(event) {
+        event.stopPropagation();
         loadLocalStorageCards();
     });
 
@@ -109,7 +118,8 @@ window.addEventListener('load', function() {
     certSortButton.setAttribute('type', 'button');
     cardsContainerEl.insertAdjacentElement('beforebegin', certSortButton);
 
-    certSortButton.addEventListener('click', (e) => {
+    certSortButton.addEventListener('click', (event) => {
+        event.stopPropagation();
         cards.sort(GradedCard.compareCertification);
         cardsContainerEl.innerHTML = '';
         loadCardsContainer(cards);
@@ -120,7 +130,8 @@ window.addEventListener('load', function() {
     yearSortButton.setAttribute('type', 'button');
     cardsContainerEl.insertAdjacentElement('beforebegin', yearSortButton);
 
-    yearSortButton.addEventListener('click', (e) => {
+    yearSortButton.addEventListener('click', (event) => {
+        event.stopPropagation();
         cards.sort(GradedCard.compareYear);
         cardsContainerEl.innerHTML = '';
         loadCardsContainer(cards);
@@ -131,7 +142,8 @@ window.addEventListener('load', function() {
     soldSortButton.setAttribute('type', 'button');
     cardsContainerEl.insertAdjacentElement('beforebegin', soldSortButton);
 
-    soldSortButton.addEventListener('click', (e) => {
+    soldSortButton.addEventListener('click', (event) => {
+        event.stopPropagation();
         cards.sort(GradedCard.compareSold);
         cardsContainerEl.innerHTML = '';
         loadCardsContainer(cards);
