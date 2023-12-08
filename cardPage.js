@@ -81,7 +81,6 @@ window.addEventListener('load', function() {
     if(!loadLocalStorageCards()){
         loadCardsContainer(cards);
     }
-    const container = document.getElementsByClassName('container')[0];
     const saveButton = document.createElement('button');
     saveButton.innerText = 'Save';
     saveButton.setAttribute('type', 'button');
