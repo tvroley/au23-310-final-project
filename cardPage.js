@@ -11,17 +11,7 @@ window.addEventListener('load', function() {
     const certificationEl = document.getElementById('certification-number');
     const frontImageEl = document.getElementById('front-image-link');
     const backImageEl = document.getElementById('back-image-link');
-    const validateYear = function(input) {
-        const re = /(18|19|20)\d{2}/;
-        const year = input.value.trim();
-        if(re.test(year)) {
-            input.parentElement.classList.remove("invalid");
-            return true;
-        } else {
-            input.parentElement.classList.add("invalid");
-            return false;
-        }
-    }
+    
     const loadCardsContainer = function(myCards) {
         for(let i = 0; i < myCards.length; i++) {
             const currentCard = myCards[i];
@@ -66,6 +56,7 @@ window.addEventListener('load', function() {
             cardsContainerEl.appendChild(divEl);
         }
     }
+    
     cardsContainerEl.addEventListener('click', function(event) {
         event.stopPropagation();
         const el = event.target;
@@ -73,6 +64,7 @@ window.addEventListener('load', function() {
             window.open(el.src);
         }
     });
+    
     const loadLocalStorageCards = function() {
         const cardsWord = localStorage.getItem('cards');
         if(cardsWord) {
@@ -85,9 +77,11 @@ window.addEventListener('load', function() {
             return false;
         }
     }
+    
     if(!loadLocalStorageCards()){
         loadCardsContainer(cards);
     }
+    
     const saveButton = document.createElement('button');
     saveButton.innerText = 'Save';
     saveButton.setAttribute('type', 'button');
@@ -150,25 +144,21 @@ window.addEventListener('load', function() {
     });
 
     cardFormEl.addEventListener("submit", (e) => {
-        if (!(validateYear(yearEl))) {
-            e.preventDefault();
-        } else {
-            const year = yearEl.value.trim();
-            const brand = brandEl.value.trim();
-            const cardSet = setEl.value.trim();
-            const cardNumber = numberEl.value.trim();
-            const player = playerEl.value.trim();
-            const gradingCompany = gradingCompanyEl.value.trim();
-            const grade = gradeEl.value.trim();
-            const certificationNumber = certificationEl.value.trim();
-            const frontCardImageLink = frontImageEl.value.trim();
-            const backCardImageLink = backImageEl.value.trim();
-            const currentCard = new GradedCard(year, brand, cardSet, cardNumber, player, gradingCompany, grade, certificationNumber, frontCardImageLink, backCardImageLink);
-            cards.push(currentCard);
-            loadCardsContainer(cards);
-            const cardsWord = JSON.stringify(cards);
-            localStorage.setItem('cards', cardsWord);
-        }
+        const year = yearEl.value.trim();
+        const brand = brandEl.value.trim();
+        const cardSet = setEl.value.trim();
+        const cardNumber = numberEl.value.trim();
+        const player = playerEl.value.trim();
+        const gradingCompany = gradingCompanyEl.value.trim();
+        const grade = gradeEl.value.trim();
+        const certificationNumber = certificationEl.value.trim();
+        const frontCardImageLink = frontImageEl.value.trim();
+        const backCardImageLink = backImageEl.value.trim();
+        const currentCard = new GradedCard(year, brand, cardSet, cardNumber, player, gradingCompany, grade, certificationNumber, frontCardImageLink, backCardImageLink);
+        cards.push(currentCard);
+        loadCardsContainer(cards);
+        const cardsWord = JSON.stringify(cards);
+        localStorage.setItem('cards', cardsWord);
     });
 
     const BASE_URL = 'https://api.nytimes.com/svc/search/v2/articlesearch.json';
