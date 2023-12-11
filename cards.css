@@ -26,3 +26,7 @@ input:invalid {
 .div-card-form-row {
     margin: auto;
 }
+
+.div-card-form-column {
+    margin: 1% 2%;
+}
