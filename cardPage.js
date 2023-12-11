@@ -53,19 +53,6 @@ window.addEventListener('load', function() {
             divEl.appendChild(soldCheckBoxLabel);
             divEl.appendChild(soldCheckBox);
 
-            soldCheckBox.addEventListener('change', function(e) {
-                e.stopPropagation();
-                if(soldCheckBox.checked) {
-                    soldCheckBox.parentElement.classList.add('sold');
-                    soldCheckBox.parentElement.classList.remove('unsold');
-                    soldCheckBox.parentElement.dataset.sold = true;
-                } else {
-                    soldCheckBox.parentElement.classList.remove('sold');
-                    soldCheckBox.parentElement.classList.add('unsold');
-                    soldCheckBox.parentElement.dataset.sold = false;
-                }
-            });
-
             cardsContainerEl.appendChild(divEl);
         }
     }
@@ -75,6 +62,22 @@ window.addEventListener('load', function() {
         const el = event.target;
         if(el.tagName === 'IMG') {
             window.open(el.src);
+        }
+    });
+
+    cardsContainerEl.addEventListener('change', function(event) {
+        event.stopPropagation();
+        const el = event.target;
+        if(el.tagName === 'INPUT') {
+            if(el.checked) {
+                el.parentElement.classList.add('sold');
+                el.parentElement.classList.remove('unsold');
+                el.parentElement.dataset.sold = true;
+            } else {
+                el.parentElement.classList.remove('sold');
+                el.parentElement.classList.add('unsold');
+                el.parentElement.dataset.sold = false;
+            }
         }
     });
     
