@@ -21,6 +21,7 @@ window.addEventListener('load', function() {
             divEl.setAttribute('data-cert', `${currentCard.certificationNumber}`);
             divEl.setAttribute('data-year', `${currentCard.year}`);
             divEl.setAttribute('data-sold', `${currentCard.sold}`);
+            divEl.classList.add('card-div');
             const pEl = document.createElement('p');
             const soldCheckBox = document.createElement('input');
             const soldCheckBoxId = `sold-checbox-${currentCard.certificationNumber}`;
@@ -109,6 +110,14 @@ window.addEventListener('load', function() {
         loadLocalStorageCards();
     });
 
+    const sortCardElements = function(sortFunc) {
+        const cardEls = document.getElementsByClassName('card-div');
+        const cardElArray = Array.from(cardEls);
+        cardsContainerEl.innerHTML = '';
+        cardElArray.sort(sortFunc);
+        cardElArray.forEach((e) => cardsContainerEl.appendChild(e));
+    };
+
     const certSortButton = document.createElement('button');
     certSortButton.innerText = 'Sort By Certification Number';
     certSortButton.setAttribute('type', 'button');
@@ -117,8 +126,7 @@ window.addEventListener('load', function() {
     certSortButton.addEventListener('click', (event) => {
         event.stopPropagation();
         cards.sort(GradedCard.compareCertification);
-        cardsContainerEl.innerHTML = '';
-        loadCardsContainer(cards);
+        sortCardElements((a, b) => a.dataset.cert - b.dataset.cert);
     });
 
     const yearSortButton = document.createElement('button');
