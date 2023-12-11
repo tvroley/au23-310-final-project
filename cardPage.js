@@ -18,7 +18,9 @@ window.addEventListener('load', function() {
             const frontImageEl = document.createElement('img');
             const backImageEl = document.createElement('img');
             const divEl = document.createElement('div');
-            divEl.setAttribute('cardIndex', i);
+            divEl.setAttribute('data-cert', `${currentCard.certificationNumber}`);
+            divEl.setAttribute('data-year', `${currentCard.year}`);
+            divEl.setAttribute('data-sold', `${currentCard.sold}`);
             const pEl = document.createElement('p');
             const soldCheckBox = document.createElement('input');
             const soldCheckBoxId = `sold-checbox-${currentCard.certificationNumber}`;
