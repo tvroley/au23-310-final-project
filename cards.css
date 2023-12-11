@@ -22,3 +22,7 @@ img {
 input:invalid {
     border: 1px solid red;
 }
+
+.div-card-form-row {
+    margin: auto;
+}
