@@ -11,17 +11,24 @@ window.addEventListener('load', function() {
     const certificationEl = document.getElementById('certification-number');
     const frontImageEl = document.getElementById('front-image-link');
     const backImageEl = document.getElementById('back-image-link');
+    const cardsButtonsEl = this.document.getElementById('cards-buttons');
     
     const loadCardsContainer = function(myCards) {
         for(let i = 0; i < myCards.length; i++) {
             const currentCard = myCards[i];
             const frontImageEl = document.createElement('img');
             const backImageEl = document.createElement('img');
+            const cardPicturesEl = document.createElement('div');
+            const cardInfoEl = document.createElement('div');
+            cardInfoEl.classList.add('div-card-info');
+            cardPicturesEl.classList.add('div-card-images');
+            cardPicturesEl.appendChild(frontImageEl);
+            cardPicturesEl.appendChild(backImageEl);
             const divEl = document.createElement('div');
             divEl.setAttribute('data-cert', `${currentCard.certificationNumber}`);
             divEl.setAttribute('data-year', `${currentCard.year}`);
             divEl.setAttribute('data-sold', `${currentCard.sold}`);
-            divEl.classList.add('card-div');
+            divEl.classList.add('div-card');
             const pEl = document.createElement('p');
             const soldCheckBox = document.createElement('input');
             const soldCheckBoxId = `sold-checbox-${currentCard.certificationNumber}`;
@@ -33,6 +40,7 @@ window.addEventListener('load', function() {
             pEl.innerText = currentCard.toString();
             frontImageEl.src = currentCard.frontCardImageLink;
             backImageEl.src = currentCard.backCardImageLink;
+            cardInfoEl.appendChild(pEl);
             if(currentCard.sold) {
                 divEl.classList.add('sold');
                 soldCheckBox.checked = true;
@@ -40,19 +48,21 @@ window.addEventListener('load', function() {
                 divEl.classList.add('unsold');
                 soldCheckBox.checked = false;
             }
-            divEl.appendChild(pEl);
-            divEl.appendChild(frontImageEl);
-            divEl.appendChild(backImageEl);
+            divEl.appendChild(cardPicturesEl);
+            divEl.appendChild(cardInfoEl);
             divEl.appendChild(soldCheckBoxLabel);
             divEl.appendChild(soldCheckBox);
+
             soldCheckBox.addEventListener('change', function(e) {
                 e.stopPropagation();
                 if(soldCheckBox.checked) {
                     soldCheckBox.parentElement.classList.add('sold');
                     soldCheckBox.parentElement.classList.remove('unsold');
+                    soldCheckBox.parentElement.dataset.sold = true;
                 } else {
                     soldCheckBox.parentElement.classList.remove('sold');
                     soldCheckBox.parentElement.classList.add('unsold');
+                    soldCheckBox.parentElement.dataset.sold = false;
                 }
             });
 
@@ -88,7 +98,8 @@ window.addEventListener('load', function() {
     const saveButton = document.createElement('button');
     saveButton.innerText = 'Save';
     saveButton.setAttribute('type', 'button');
-    cardsContainerEl.insertAdjacentElement('beforebegin', saveButton);
+    saveButton.classList.add('div-card-button');
+    cardsButtonsEl.appendChild(saveButton);
     
     saveButton.addEventListener('click', function(event) {
         event.stopPropagation();
@@ -103,7 +114,8 @@ window.addEventListener('load', function() {
     const loadButton = document.createElement('button');
     loadButton.innerText = 'Load';
     loadButton.setAttribute('type', 'button');
-    cardsContainerEl.insertAdjacentElement('beforebegin', loadButton);
+    loadButton.classList.add('div-card-button');
+    cardsButtonsEl.appendChild(loadButton);
     
     loadButton.addEventListener('click', function(event) {
         event.stopPropagation();
@@ -111,7 +123,7 @@ window.addEventListener('load', function() {
     });
 
     const sortCardElements = function(sortFunc) {
-        const cardEls = document.getElementsByClassName('card-div');
+        const cardEls = document.getElementsByClassName('div-card');
         const cardElArray = Array.from(cardEls);
         cardsContainerEl.innerHTML = '';
         cardElArray.sort(sortFunc);
@@ -121,7 +133,8 @@ window.addEventListener('load', function() {
     const certSortButton = document.createElement('button');
     certSortButton.innerText = 'Sort By Certification Number';
     certSortButton.setAttribute('type', 'button');
-    cardsContainerEl.insertAdjacentElement('beforebegin', certSortButton);
+    certSortButton.classList.add('div-card-button');
+    cardsButtonsEl.appendChild(certSortButton);
 
     certSortButton.addEventListener('click', (event) => {
         event.stopPropagation();
@@ -132,7 +145,8 @@ window.addEventListener('load', function() {
     const yearSortButton = document.createElement('button');
     yearSortButton.innerText = 'Sort By Year';
     yearSortButton.setAttribute('type', 'button');
-    cardsContainerEl.insertAdjacentElement('beforebegin', yearSortButton);
+    yearSortButton.classList.add('div-card-button');
+    cardsButtonsEl.appendChild(yearSortButton);
 
     yearSortButton.addEventListener('click', (event) => {
         event.stopPropagation();
@@ -143,7 +157,8 @@ window.addEventListener('load', function() {
     const soldSortButton = document.createElement('button');
     soldSortButton.innerText = 'Sort By Sold Status';
     soldSortButton.setAttribute('type', 'button');
-    cardsContainerEl.insertAdjacentElement('beforebegin', soldSortButton);
+    soldSortButton.classList.add('div-card-button');
+    cardsButtonsEl.appendChild(soldSortButton);
 
     const sortSoldEls = function(a, b) {
         if(a.dataset.sold > b.dataset.sold) {

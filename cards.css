@@ -30,3 +30,27 @@ input:invalid {
 .div-card-form-column {
     margin: 1% 2%;
 }
+
+.div-card-buttons {
+    border: 3px solid navy;
+    background-color: lightseagreen;
+    margin: 1% 0% 0% 0%;
+}
+
+.div-card-button {
+    margin: 1%;
+}
+
+.div-card-images {
+    margin: 1%;
+    align-items: center;
+}
+
+.div-card {
+    align-items: center;
+}
+
+.div-card-info {
+    margin: 1%;
+    align-items: center;
+}
