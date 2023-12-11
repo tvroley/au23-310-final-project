@@ -137,8 +137,7 @@ window.addEventListener('load', function() {
     yearSortButton.addEventListener('click', (event) => {
         event.stopPropagation();
         cards.sort(GradedCard.compareYear);
-        cardsContainerEl.innerHTML = '';
-        loadCardsContainer(cards);
+        sortCardElements((a, b) => a.dataset.year - b.dataset.year);
     });
 
     const soldSortButton = document.createElement('button');
@@ -146,11 +145,19 @@ window.addEventListener('load', function() {
     soldSortButton.setAttribute('type', 'button');
     cardsContainerEl.insertAdjacentElement('beforebegin', soldSortButton);
 
+    const sortSoldEls = function(a, b) {
+        if(a.dataset.sold > b.dataset.sold) {
+            return 1;
+        } else if(a.dataset.sold < b.dataset.sold) {
+            return -1;
+        }
+        return 0;
+    };
+
     soldSortButton.addEventListener('click', (event) => {
         event.stopPropagation();
         cards.sort(GradedCard.compareSold);
-        cardsContainerEl.innerHTML = '';
-        loadCardsContainer(cards);
+        sortCardElements(sortSoldEls);
     });
 
     cardFormEl.addEventListener("submit", (e) => {
