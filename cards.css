@@ -4,12 +4,14 @@ img {
 
 .sold{
     border: 3px solid blue;
-    background-color:  rgba(0, 204, 255, 0.126);
+    background-color:  lightblue;
+    background-blend-mode: normal;
 }
 
 .unsold{
     border: 3px solid gray;
-    background-color: rgba(128, 128, 128, 0.186);
+    background-color: lightgray;
+    background-blend-mode: normal;
 }
 
 .invalid{
