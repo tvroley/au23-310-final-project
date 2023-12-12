@@ -40,6 +40,17 @@ class GradedCard extends Card {
     }
 
     static compareSold(cardA, cardB) {
-        return cardA.sold - cardB.sold;
+        if(cardA.sold == 'string') {
+            cardA.sold = cardA.sold === 'true';
+        }
+        if(cardB.sold == 'string') {
+            cardB.sold = cardB.sold === 'true';
+        }
+        if(cardA.sold > cardB.sold) {
+            return 1;
+        } else if(cardA.sold < cardB.sold) {
+            return -1;
+        }
+        return 0;
     }
 }

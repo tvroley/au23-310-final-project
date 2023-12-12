@@ -27,8 +27,10 @@ window.addEventListener('load', function() {
             const divEl = document.createElement('div');
             divEl.setAttribute('data-cert', `${currentCard.certificationNumber}`);
             divEl.setAttribute('data-year', `${currentCard.year}`);
-            divEl.setAttribute('data-sold', `${currentCard.sold}`);
+            divEl.setAttribute('data-sold', currentCard.sold);
             divEl.classList.add('div-card');
+            const divElId = `div-card-${currentCard.certificationNumber}`;
+            divEl.setAttribute('id', divElId);
             const pEl = document.createElement('p');
             const soldCheckBox = document.createElement('input');
             const soldCheckBoxId = `sold-checbox-${currentCard.certificationNumber}`;
@@ -41,7 +43,9 @@ window.addEventListener('load', function() {
             frontImageEl.src = currentCard.frontCardImageLink;
             backImageEl.src = currentCard.backCardImageLink;
             cardInfoEl.appendChild(pEl);
-            if(currentCard.sold) {
+            cardInfoEl.appendChild(soldCheckBoxLabel);
+            cardInfoEl.appendChild(soldCheckBox);
+            if(currentCard.sold === true || currentCard.sold === 'true') {
                 divEl.classList.add('sold');
                 soldCheckBox.checked = true;
             } else {
@@ -50,8 +54,6 @@ window.addEventListener('load', function() {
             }
             divEl.appendChild(cardPicturesEl);
             divEl.appendChild(cardInfoEl);
-            divEl.appendChild(soldCheckBoxLabel);
-            divEl.appendChild(soldCheckBox);
 
             cardsContainerEl.appendChild(divEl);
         }
@@ -69,14 +71,20 @@ window.addEventListener('load', function() {
         event.stopPropagation();
         const el = event.target;
         if(el.tagName === 'INPUT') {
+            const currentCardDiv = el.parentElement.parentElement;
+            const currentCard = cards.find(card => {
+                return card.certificationNumber == currentCardDiv.dataset.cert;
+            });
             if(el.checked) {
-                el.parentElement.classList.add('sold');
-                el.parentElement.classList.remove('unsold');
-                el.parentElement.dataset.sold = true;
+                currentCardDiv.classList.add('sold');
+                currentCardDiv.classList.remove('unsold');
+                currentCardDiv.dataset.sold = true;
+                currentCard.sold = true;
             } else {
-                el.parentElement.classList.remove('sold');
-                el.parentElement.classList.add('unsold');
-                el.parentElement.dataset.sold = false;
+                currentCardDiv.classList.remove('sold');
+                currentCardDiv.classList.add('unsold');
+                currentCardDiv.dataset.sold = false;
+                currentCard.sold = false;
             }
         }
     });
@@ -106,10 +114,6 @@ window.addEventListener('load', function() {
     
     saveButton.addEventListener('click', function(event) {
         event.stopPropagation();
-        for(let i = 0; i < cards.length; i++) {
-            const soldCheckBox = document.getElementById(`sold-checbox-${cards[i].certificationNumber}`);
-            cards[i].sold = soldCheckBox.checked;
-        }
         const cardsWord = JSON.stringify(cards);
         localStorage.setItem('cards', cardsWord);
     });
@@ -174,7 +178,7 @@ window.addEventListener('load', function() {
 
     soldSortButton.addEventListener('click', (event) => {
         event.stopPropagation();
-        cards.sort(GradedCard.compareSold);
+        cards = cards.sort(GradedCard.compareSold);
         sortCardElements(sortSoldEls);
     });
 
