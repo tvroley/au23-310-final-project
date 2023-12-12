@@ -23,6 +23,10 @@ input:invalid {
     border: 1px solid red;
 }
 
+.hidden {
+    display: none;
+}
+
 .div-card-form-row {
     margin: auto;
 }

@@ -11,7 +11,8 @@ window.addEventListener('load', function() {
     const certificationEl = document.getElementById('certification-number');
     const frontImageEl = document.getElementById('front-image-link');
     const backImageEl = document.getElementById('back-image-link');
-    const cardsButtonsEl = this.document.getElementById('cards-buttons');
+    const cardsButtonsEl = document.getElementById('cards-buttons');
+    const certErrorEl = document.getElementById('certification-error');
     
     const loadCardsContainer = function(myCards) {
         for(let i = 0; i < myCards.length; i++) {
@@ -186,10 +187,13 @@ window.addEventListener('load', function() {
         const foundCard = cards.find((card) => card.certificationNumber === cert);
         if(foundCard) {
             certificationEl.classList.add('invalid');
-            console.log(`card with certification number of ${cert} already submitted`);
+            certErrorEl.textContent = `card with certification number of ${cert} already submitted`;
+            certErrorEl.classList.remove('hidden');
             return false;
         } else {
             certificationEl.classList.remove('invalid');
+            certErrorEl.innerText = '';
+            certErrorEl.classList.add('hidden');
             return true;
         }
     };
