@@ -182,7 +182,22 @@ window.addEventListener('load', function() {
         sortCardElements(sortSoldEls);
     });
 
+    const validateCert = function(cert) {
+        const foundCard = cards.find((card) => card.certificationNumber === cert);
+        if(foundCard) {
+            certificationEl.classList.add('invalid');
+            console.log(`card with certification number of ${cert} already submitted`);
+            return false;
+        } else {
+            certificationEl.classList.remove('invalid');
+            return true;
+        }
+    };
+
     cardFormEl.addEventListener("submit", (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+
         const year = yearEl.value.trim();
         const brand = brandEl.value.trim();
         const cardSet = setEl.value.trim();
@@ -193,11 +208,14 @@ window.addEventListener('load', function() {
         const certificationNumber = certificationEl.value.trim();
         const frontCardImageLink = frontImageEl.value.trim();
         const backCardImageLink = backImageEl.value.trim();
-        const currentCard = new GradedCard(year, brand, cardSet, cardNumber, player, gradingCompany, grade, certificationNumber, frontCardImageLink, backCardImageLink);
-        cards.push(currentCard);
-        loadCardsContainer(cards);
-        const cardsWord = JSON.stringify(cards);
-        localStorage.setItem('cards', cardsWord);
+        
+        if(validateCert(certificationNumber)) {
+            const currentCard = new GradedCard(year, brand, cardSet, cardNumber, player, gradingCompany, grade, certificationNumber, frontCardImageLink, backCardImageLink);
+            cards.push(currentCard);
+            loadCardsContainer(cards);
+            const cardsWord = JSON.stringify(cards);
+            localStorage.setItem('cards', cardsWord);
+        }
     });
 
     const BASE_URL = 'https://api.nytimes.com/svc/search/v2/articlesearch.json';
