@@ -27,6 +27,10 @@ input:invalid {
     display: none;
 }
 
+.centered-text {
+    text-align: center;
+}
+
 .div-card-form-row {
     margin: auto;
 }
