@@ -13,50 +13,63 @@ window.addEventListener('load', function() {
     const backImageEl = document.getElementById('back-image-link');
     const cardsButtonsEl = document.getElementById('cards-buttons');
     const certErrorEl = document.getElementById('certification-error');
-    
+
+    const removeAllChildren = function(el) {
+        let currentChild = el.lastChild;
+        while(currentChild) {
+            currentChild.remove();
+            currentChild = el.lastChild;
+        }
+    }
+
+    const createCardEl = function(currentCard) {
+        const frontImageEl = document.createElement('img');
+        const backImageEl = document.createElement('img');
+        const cardPicturesEl = document.createElement('div');
+        const cardInfoEl = document.createElement('div');
+        cardInfoEl.classList.add('div-card-info');
+        cardPicturesEl.classList.add('div-card-images');
+        cardPicturesEl.appendChild(frontImageEl);
+        cardPicturesEl.appendChild(backImageEl);
+        const divEl = document.createElement('div');
+        divEl.setAttribute('data-cert', `${currentCard.certificationNumber}`);
+        divEl.setAttribute('data-year', `${currentCard.year}`);
+        divEl.setAttribute('data-sold', currentCard.sold);
+        divEl.classList.add('div-card');
+        const divElId = `div-card-${currentCard.certificationNumber}`;
+        divEl.setAttribute('id', divElId);
+        const pEl = document.createElement('p');
+        const soldCheckBox = document.createElement('input');
+        const soldCheckBoxId = `sold-checbox-${currentCard.certificationNumber}`;
+        soldCheckBox.setAttribute('id', soldCheckBoxId);
+        const soldCheckBoxLabel = document.createElement('label');
+        soldCheckBoxLabel.setAttribute('for', soldCheckBoxId);
+        soldCheckBoxLabel.innerText = 'Sold';
+        soldCheckBox.setAttribute('type', 'checkbox');
+        pEl.innerText = currentCard.toString();
+        frontImageEl.src = currentCard.frontCardImageLink;
+        backImageEl.src = currentCard.backCardImageLink;
+        cardInfoEl.appendChild(pEl);
+        cardInfoEl.appendChild(soldCheckBoxLabel);
+        cardInfoEl.appendChild(soldCheckBox);
+        if(currentCard.sold === true || currentCard.sold === 'true') {
+            divEl.classList.add('sold');
+            soldCheckBox.checked = true;
+        } else {
+            divEl.classList.add('unsold');
+            soldCheckBox.checked = false;
+        }
+        divEl.appendChild(cardPicturesEl);
+        divEl.appendChild(cardInfoEl);
+
+        return divEl;
+    }
+
     const loadCardsContainer = function(myCards) {
         for(let i = 0; i < myCards.length; i++) {
             const currentCard = myCards[i];
-            const frontImageEl = document.createElement('img');
-            const backImageEl = document.createElement('img');
-            const cardPicturesEl = document.createElement('div');
-            const cardInfoEl = document.createElement('div');
-            cardInfoEl.classList.add('div-card-info');
-            cardPicturesEl.classList.add('div-card-images');
-            cardPicturesEl.appendChild(frontImageEl);
-            cardPicturesEl.appendChild(backImageEl);
-            const divEl = document.createElement('div');
-            divEl.setAttribute('data-cert', `${currentCard.certificationNumber}`);
-            divEl.setAttribute('data-year', `${currentCard.year}`);
-            divEl.setAttribute('data-sold', currentCard.sold);
-            divEl.classList.add('div-card');
-            const divElId = `div-card-${currentCard.certificationNumber}`;
-            divEl.setAttribute('id', divElId);
-            const pEl = document.createElement('p');
-            const soldCheckBox = document.createElement('input');
-            const soldCheckBoxId = `sold-checbox-${currentCard.certificationNumber}`;
-            soldCheckBox.setAttribute('id', soldCheckBoxId);
-            const soldCheckBoxLabel = document.createElement('label');
-            soldCheckBoxLabel.setAttribute('for', soldCheckBoxId);
-            soldCheckBoxLabel.innerText = 'Sold';
-            soldCheckBox.setAttribute('type', 'checkbox');
-            pEl.innerText = currentCard.toString();
-            frontImageEl.src = currentCard.frontCardImageLink;
-            backImageEl.src = currentCard.backCardImageLink;
-            cardInfoEl.appendChild(pEl);
-            cardInfoEl.appendChild(soldCheckBoxLabel);
-            cardInfoEl.appendChild(soldCheckBox);
-            if(currentCard.sold === true || currentCard.sold === 'true') {
-                divEl.classList.add('sold');
-                soldCheckBox.checked = true;
-            } else {
-                divEl.classList.add('unsold');
-                soldCheckBox.checked = false;
-            }
-            divEl.appendChild(cardPicturesEl);
-            divEl.appendChild(cardInfoEl);
-
-            cardsContainerEl.appendChild(divEl);
+            const currentCardEl = createCardEl(currentCard);
+            cardsContainerEl.appendChild(currentCardEl);
         }
     }
     
@@ -93,7 +106,7 @@ window.addEventListener('load', function() {
     const loadLocalStorageCards = function() {
         const cardsWord = localStorage.getItem('cards');
         if(cardsWord) {
-            cardsContainerEl.innerHTML = '';
+            removeAllChildren(cardsContainerEl);
             let myCards = JSON.parse(cardsWord);
             cards = myCards.map(GradedCard.castToGradedCard);
             loadCardsContainer(cards);
@@ -216,9 +229,8 @@ window.addEventListener('load', function() {
         if(validateCert(certificationNumber)) {
             const currentCard = new GradedCard(year, brand, cardSet, cardNumber, player, gradingCompany, grade, certificationNumber, frontCardImageLink, backCardImageLink, false);
             cards.push(currentCard);
-            loadCardsContainer(cards);
-            const cardsWord = JSON.stringify(cards);
-            localStorage.setItem('cards', cardsWord);
+            const cardEl = createCardEl(currentCard);
+            cardsContainerEl.appendChild(cardEl);
         }
     });
 
