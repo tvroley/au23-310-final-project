@@ -214,7 +214,7 @@ window.addEventListener('load', function() {
         const backCardImageLink = backImageEl.value.trim();
         
         if(validateCert(certificationNumber)) {
-            const currentCard = new GradedCard(year, brand, cardSet, cardNumber, player, gradingCompany, grade, certificationNumber, frontCardImageLink, backCardImageLink);
+            const currentCard = new GradedCard(year, brand, cardSet, cardNumber, player, gradingCompany, grade, certificationNumber, frontCardImageLink, backCardImageLink, false);
             cards.push(currentCard);
             loadCardsContainer(cards);
             const cardsWord = JSON.stringify(cards);
