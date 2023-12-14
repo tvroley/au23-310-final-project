@@ -232,6 +232,7 @@ window.addEventListener('load', function() {
             const headline = responseJson.response.docs[0].headline.print_headline;
             const headlineEl = document.createElement('p');
             headlineEl.innerText = `Sports Cards News: ${headline}`;
+            headlineEl.classList.add('centered-text');
             cardFormEl.insertAdjacentElement('beforebegin', headlineEl);
         }
     }).catch(function(err) {
