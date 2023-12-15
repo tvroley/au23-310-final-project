@@ -14,6 +14,9 @@ window.addEventListener('load', function() {
     const cardsButtonsEl = document.getElementById('cards-buttons');
     const certErrorEl = document.getElementById('certification-error');
 
+    let cardsBegin = 0;
+    let cardsPerPage = 10;
+
     const removeAllChildren = function(el) {
         let currentChild = el.lastChild;
         while(currentChild) {
@@ -66,7 +69,7 @@ window.addEventListener('load', function() {
     }
 
     const loadCardsContainer = function(myCards) {
-        for(let i = 0; i < myCards.length; i++) {
+        for(let i = cardsBegin; i < myCards.length && i < cardsBegin + cardsPerPage; i++) {
             const currentCard = myCards[i];
             const currentCardEl = createCardEl(currentCard);
             cardsContainerEl.appendChild(currentCardEl);
@@ -194,6 +197,38 @@ window.addEventListener('load', function() {
         event.stopPropagation();
         cards = cards.sort(GradedCard.compareSold);
         sortCardElements(sortSoldEls);
+    });
+
+    const previousCardsButton = document.createElement('button');
+    previousCardsButton.innerText = 'Previous Cards';
+    previousCardsButton.setAttribute('type', 'button');
+    previousCardsButton.classList.add('div-card-button');
+    cardsButtonsEl.appendChild(previousCardsButton);
+
+    previousCardsButton.addEventListener('click', (event) => {
+        event.stopPropagation();
+        if(cardsBegin - cardsPerPage > 0) {
+            cardsBegin -= cardsPerPage;
+        } else {
+            cardsBegin = 0;
+        }
+        removeAllChildren(cardsContainerEl);
+        loadCardsContainer(cards);
+    });
+
+    const nextCardsButton = document.createElement('button');
+    nextCardsButton.innerText = 'Next Cards';
+    nextCardsButton.setAttribute('type', 'button');
+    nextCardsButton.classList.add('div-card-button');
+    cardsButtonsEl.appendChild(nextCardsButton);
+
+    nextCardsButton.addEventListener('click', (event) => {
+        event.stopPropagation();
+        if(cardsBegin + cardsPerPage < cards.length) {
+            cardsBegin += cardsPerPage;
+            removeAllChildren(cardsContainerEl);
+            loadCardsContainer(cards);
+        }
     });
 
     const validateCert = function(cert) {
