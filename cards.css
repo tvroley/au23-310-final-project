@@ -49,8 +49,7 @@ input:invalid {
 }
 
 .div-card-images {
-    margin: 1%;
-    align-items: center;
+    text-align: center;
 }
 
 .div-card {
@@ -58,6 +57,5 @@ input:invalid {
 }
 
 .div-card-info {
-    margin: 1%;
-    align-items: center;
+    text-align: center;
 }
