@@ -233,22 +233,4 @@ window.addEventListener('load', function() {
             cardsContainerEl.appendChild(cardEl);
         }
     });
-
-    const BASE_URL = 'https://api.nytimes.com/svc/search/v2/articlesearch.json';
-    const url = `${BASE_URL}?q=topps+fanatics&api-key=${API_KEY}`;
-    fetch(url).then(function(data) {
-        return data.json();
-    })
-    .then(function(responseJson) {
-        if(responseJson.response.docs[0]) {
-            const headline = responseJson.response.docs[0].headline.print_headline;
-            const headlineEl = document.createElement('p');
-            headlineEl.innerText = `Sports Cards News: ${headline}`;
-            headlineEl.classList.add('centered-text');
-            cardFormEl.insertAdjacentElement('beforebegin', headlineEl);
-        }
-    }).catch(function(err) {
-        console.log(err);
-        return 'No news';
-    });
 });
