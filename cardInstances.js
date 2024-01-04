@@ -75,6 +75,7 @@ let grandpaCollection = [
 
 const uncleCollection = [
     new GradedCard(2006, 'Rittenhouse', '2006 Rittenhouse All-Decade Team', 'DC02', 'Sue Bird', 'PSA', '9', '77909480', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/144222123/S69awq1SqkazYGysmtRnRg.jpg', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/144222123/KHXBcxLR0E6u5t1-u3kBEQ.jpg', false),
+    new GradedCard(2015, 'Rittenhouse', '2015 Rittenhouse WNBA Rookie Autograph', '', 'Jewell Loyd', 'PSA', '10', '78542586', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/145434545/RTYdKpNTv06GDFtYjmOO3A.jpg', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/145434545/SuTLlgfIBUKBepkk_90agQ.jpg', false),
     new GradedCard(2018, 'Rittenhouse', '2018 Rittenhouse WNBA', '54', 'Kelsey Plum', 'PSA', '10', '78542611', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/145434570/lKWATaMrz0uReuE9DDJg9w.jpg', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/145434570/d4q2O6DBe0CaD2wvrIccgw.jpg', false),
     new GradedCard(2018, 'Rittenhouse', '2018 Rittenhouse WNBA', '93', 'Breanna Stewart', 'PSA', '10', '78542616', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/145434575/6b6vYq56jkicub4zTN8kQA.jpg', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/145434575/P0IpXcla-0GWAl9uVNjNHA.jpg', false),
     new GradedCard(2019, 'Panini', '2019 Panini Donruss Optic Holo', 93, 'Arike Ogunbowale', 'PSA', '10', '78193099', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/144690078/XDFhypkQoEG_ElA4fAHtFw.jpg', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/144690078/kQXkOBANeUSImt7M_Zi4vw.jpg', false),
