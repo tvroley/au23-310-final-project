@@ -116,32 +116,19 @@ window.addEventListener('load', function() {
         }
     }
     
-    if(!loadLocalStorageCards()){
-        loadCardsContainer(cards);
-    }
-    
     const saveButton = document.createElement('button');
     saveButton.innerText = 'Save';
     saveButton.setAttribute('type', 'button');
+    saveButton.setAttribute('id', 'button-save');
     saveButton.classList.add('div-card-button');
     cardsButtonsEl.appendChild(saveButton);
-    
-    saveButton.addEventListener('click', function(event) {
-        event.stopPropagation();
-        const cardsWord = JSON.stringify(cards);
-        localStorage.setItem('cards', cardsWord);
-    });
 
     const loadButton = document.createElement('button');
     loadButton.innerText = 'Load';
     loadButton.setAttribute('type', 'button');
+    loadButton.setAttribute('id', 'button-load');
     loadButton.classList.add('div-card-button');
     cardsButtonsEl.appendChild(loadButton);
-    
-    loadButton.addEventListener('click', function(event) {
-        event.stopPropagation();
-        loadLocalStorageCards();
-    });
 
     const sortCardElements = function(sortFunc) {
         const cardEls = document.getElementsByClassName('div-card');
@@ -154,30 +141,21 @@ window.addEventListener('load', function() {
     const certSortButton = document.createElement('button');
     certSortButton.innerText = 'Sort By Certification Number';
     certSortButton.setAttribute('type', 'button');
+    certSortButton.setAttribute('id', 'button-cert-sort');
     certSortButton.classList.add('div-card-button');
     cardsButtonsEl.appendChild(certSortButton);
-
-    certSortButton.addEventListener('click', (event) => {
-        event.stopPropagation();
-        cards.sort(GradedCard.compareCertification);
-        sortCardElements((a, b) => a.dataset.cert - b.dataset.cert);
-    });
 
     const yearSortButton = document.createElement('button');
     yearSortButton.innerText = 'Sort By Year';
     yearSortButton.setAttribute('type', 'button');
+    yearSortButton.setAttribute('id', 'button-year-sort');
     yearSortButton.classList.add('div-card-button');
     cardsButtonsEl.appendChild(yearSortButton);
-
-    yearSortButton.addEventListener('click', (event) => {
-        event.stopPropagation();
-        cards.sort(GradedCard.compareYear);
-        sortCardElements((a, b) => a.dataset.year - b.dataset.year);
-    });
 
     const soldSortButton = document.createElement('button');
     soldSortButton.innerText = 'Sort By Sold Status';
     soldSortButton.setAttribute('type', 'button');
+    soldSortButton.setAttribute('id', 'button-sold-sort');
     soldSortButton.classList.add('div-card-button');
     cardsButtonsEl.appendChild(soldSortButton);
 
@@ -190,11 +168,25 @@ window.addEventListener('load', function() {
         return 0;
     };
 
-    soldSortButton.addEventListener('click', (event) => {
+    cardsButtonsEl.addEventListener('click', (event) => {
+        const currentEl = event.target;
         event.stopPropagation();
-        cards = cards.sort(GradedCard.compareSold);
-        sortCardElements(sortSoldEls);
-    });
+        if(currentEl.id === 'button-save') {
+            const cardsWord = JSON.stringify(cards);
+            localStorage.setItem('cards', cardsWord);
+        } else if(currentEl.id === 'button-load') {
+            loadLocalStorageCards();
+        } else if(currentEl.id === 'button-cert-sort') {
+            cards.sort(GradedCard.compareCertification);
+            sortCardElements((a, b) => a.dataset.cert - b.dataset.cert);
+        } else if(currentEl.id === 'button-year-sort') {
+            cards.sort(GradedCard.compareYear);
+            sortCardElements((a, b) => a.dataset.year - b.dataset.year);
+        } else if(currentEl.id === 'button-sold-sort') {
+            cards = cards.sort(GradedCard.compareSold);
+            sortCardElements(sortSoldEls);
+        }
+    }); 
 
     const validateCert = function(cert) {
         const foundCard = cards.find((card) => card.certificationNumber === cert);
@@ -233,4 +225,8 @@ window.addEventListener('load', function() {
             cardsContainerEl.appendChild(cardEl);
         }
     });
+
+    if(!loadLocalStorageCards()){
+        loadCardsContainer(cards);
+    }
 });
