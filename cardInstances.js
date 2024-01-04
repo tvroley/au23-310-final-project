@@ -74,6 +74,7 @@ let grandpaCollection = [
 ];
 
 const uncleCollection = [
+    new GradedCard(2002, 'Fleer', '2002 Fleer Ultra', 101, 'Sue Bird', 'PSA', '9', '63741116', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/126428695/355823629.jpg', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/126428695/355819081.jpg', false),
     new GradedCard(2006, 'Rittenhouse', '2006 Rittenhouse All-Decade Team', 'DC02', 'Sue Bird', 'PSA', '9', '77909480', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/144222123/S69awq1SqkazYGysmtRnRg.jpg', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/144222123/KHXBcxLR0E6u5t1-u3kBEQ.jpg', false),
     new GradedCard(2015, 'Rittenhouse', '2015 Rittenhouse WNBA Rookie Autograph', '', 'Jewell Loyd', 'PSA', '10', '78542586', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/145434545/RTYdKpNTv06GDFtYjmOO3A.jpg', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/145434545/SuTLlgfIBUKBepkk_90agQ.jpg', false),
     new GradedCard(2018, 'Rittenhouse', '2018 Rittenhouse WNBA', '54', 'Kelsey Plum', 'PSA', '10', '78542611', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/145434570/lKWATaMrz0uReuE9DDJg9w.jpg', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/145434570/d4q2O6DBe0CaD2wvrIccgw.jpg', false),
