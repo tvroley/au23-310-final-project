@@ -1,4 +1,4 @@
-let cards = [
+let grandpaCollection = [
     new GradedCard(1958, 'Topps', '1958 Topps', 62, 'Jim Brown', 'PSA', '4', '67733031', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/132113359/TyLJOT5i7ka5C-qOUAjc-w.jpg', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/132113359/9Lz9EJNkUU-0ut5gtBhkeg.jpg', true),
     new GradedCard(1963, 'Fleer', '1963 Fleer', '', 'Checklist 1-66', 'PSA', '5', '69683152', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/134162925/rhz8nxNC_EG5HFJZW6L6PQ.jpg', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/134162925/kMfM2yjrjE2q0AJNQU2OCA.jpg', false),
     new GradedCard(1964, 'Topps', '1964 Topps', 125, 'Pete Rose', 'PSA', '5', '69683153', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/134162926/IGKIwryO9UGV5QIMbnzWPA.jpg', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/134162926/Oesmk-aEakO7OloQXa5yQA.jpg', true),
@@ -71,4 +71,11 @@ let cards = [
     new GradedCard(1965, 'Topps', '1965 Topps', 519, `Bob Uecker`, 'PSA', "7", "80179937", 'https://d1htnxwo4o0jhw.cloudfront.net/cert/146793671/6Txb6s8l_kOMDN8z5xrBqg.jpg', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/146793671/DDsrDz54DU6VF8uBQRKBRw.jpg', false),
     new GradedCard(1965, 'Topps', '1965 Topps', 540, `Lou Brock`, 'PSA', "7", "80179938", 'https://d1htnxwo4o0jhw.cloudfront.net/cert/146793672/x8JMD3joN0qYh31NatN3nw.jpg', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/146793672/fQN0kNLn5k-xPe3z6w4CMQ.jpg', false),
     new GradedCard(1964, 'Topps', '1964 Topps', 146, `Indians Rookies`, 'PSA', "6", "80179939", 'https://d1htnxwo4o0jhw.cloudfront.net/cert/146793673/hE-s36Jfk06eNodGogt1IQ.jpg', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/146793673/OtoEkprWfEGF3ykUpr8aLA.jpg', false)
+];
+
+const uncleCollection = [
+    new GradedCard(2006, 'Rittenhouse', '2006 Rittenhouse All-Decade Team', 'DC02', 'Sue Bird', 'PSA', '9', '77909480', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/144222123/S69awq1SqkazYGysmtRnRg.jpg', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/144222123/KHXBcxLR0E6u5t1-u3kBEQ.jpg', false),
+    new GradedCard(2018, 'Rittenhouse', '2018 Rittenhouse WNBA', '54', 'Kelsey Plum', 'PSA', '10', '78542611', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/145434570/lKWATaMrz0uReuE9DDJg9w.jpg', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/145434570/d4q2O6DBe0CaD2wvrIccgw.jpg', false),
+    new GradedCard(2018, 'Rittenhouse', '2018 Rittenhouse WNBA', '93', 'Breanna Stewart', 'PSA', '10', '78542616', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/145434575/6b6vYq56jkicub4zTN8kQA.jpg', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/145434575/P0IpXcla-0GWAl9uVNjNHA.jpg', false),
+    new GradedCard(2019, 'Panini', '2019 Panini Donruss Optic Holo', 93, 'Arike Ogunbowale', 'PSA', '10', '78193099', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/144690078/XDFhypkQoEG_ElA4fAHtFw.jpg', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/144690078/kQXkOBANeUSImt7M_Zi4vw.jpg', false)
 ];

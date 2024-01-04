@@ -13,6 +13,7 @@ window.addEventListener('load', function() {
     const backImageEl = document.getElementById('back-image-link');
     const cardsButtonsEl = document.getElementById('cards-buttons');
     const certErrorEl = document.getElementById('certification-error');
+    let cards = grandpaCollection;
 
     const removeAllChildren = function(el) {
         let currentChild = el.lastChild;
@@ -186,7 +187,34 @@ window.addEventListener('load', function() {
             cards = cards.sort(GradedCard.compareSold);
             sortCardElements(sortSoldEls);
         }
-    }); 
+    });
+    
+    const collectionSelect = document.createElement('select');
+    const blankOption = document.createElement('option');
+    blankOption.value = '0';
+    collectionSelect.add(blankOption, null);
+    const grandpaOption = document.createElement('option');
+    grandpaOption.value = '1';
+    grandpaOption.text = `Grandpa's Collection`;
+    collectionSelect.add(grandpaOption, null);
+    const uncleOption = document.createElement('option');
+    uncleOption.value = '2';
+    uncleOption.text = `Uncle's Collection`;
+    collectionSelect.add(uncleOption, null);
+    cardsButtonsEl.appendChild(collectionSelect);
+
+    collectionSelect.addEventListener('change', (event) => {
+        event.stopPropagation();
+        if(collectionSelect.selectedIndex === 1) {
+            cards = grandpaCollection;
+            removeAllChildren(cardsContainerEl);
+            loadCardsContainer(cards);
+        } else if(collectionSelect.selectedIndex === 2) {
+            cards = uncleCollection;
+            removeAllChildren(cardsContainerEl);
+            loadCardsContainer(cards);
+        }
+    });
 
     const validateCert = function(cert) {
         const foundCard = cards.find((card) => card.certificationNumber === cert);
