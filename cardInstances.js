@@ -74,6 +74,7 @@ let grandpaCollection = [
 ];
 
 const uncleCollection = [
+    new GradedCard(1992, 'Bowman', '1992 Bowman', 302, 'Mariano Rivera', 'PSA', '9', '78261079', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/144383603/mObd2K1wxkWOuMB96W2XNw.jpg', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/144383603/ATcQDQWFv06Dsq_CHPayHA.jpg', false),
     new GradedCard(2002, 'Fleer', '2002 Fleer Ultra', 101, 'Sue Bird', 'PSA', '9', '63741116', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/126428695/355823629.jpg', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/126428695/355819081.jpg', false),
     new GradedCard(2002, 'Fleer', '2002 Fleer Authentix Memorabilia Authentix Ripped', '', 'Sue Bird', 'PSA', '8', '72104595', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/137170515/PvOx2fm-X0aoLPU_a5HEDA.jpg', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/137170515/V_CLFRyQCk-r5MVfpLyU9A.jpg', false),
     new GradedCard(2006, 'Rittenhouse', '2006 Rittenhouse All-Decade Team', 'DC02', 'Sue Bird', 'PSA', '9', '77909480', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/144222123/S69awq1SqkazYGysmtRnRg.jpg', 'https://d1htnxwo4o0jhw.cloudfront.net/cert/144222123/KHXBcxLR0E6u5t1-u3kBEQ.jpg', false),
