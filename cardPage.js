@@ -191,6 +191,7 @@ window.addEventListener('load', function() {
     
     const collectionSelect = document.createElement('select');
     collectionSelect.setAttribute('id', 'select-collection');
+    collectionSelect.classList.add('div-card-button');
     const blankOption = document.createElement('option');
     blankOption.value = '0';
     collectionSelect.add(blankOption, null);

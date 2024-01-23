@@ -40,6 +40,9 @@ input:invalid {
 }
 
 .div-card-buttons {
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
     background-color: navy;
     margin: 1% 0% 0% 0%;
 }
