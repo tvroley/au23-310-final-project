@@ -25,6 +25,12 @@ input:invalid {
     display: none;
 }
 
+.div-card-form {
+    background-color: lightblue; 
+    background-blend-mode: normal;
+    padding: 10px;
+}
+
 .centered-text {
     text-align: center;
 }
