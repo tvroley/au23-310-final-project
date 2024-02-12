@@ -59,6 +59,10 @@ window.addEventListener('load', function() {
             divEl.classList.add('unsold');
             soldCheckBox.checked = false;
         }
+        const cardWindowButton = document.createElement('button');
+        cardWindowButton.innerText = 'Open Image In New Window';
+        cardWindowButton.setAttribute('type', 'button');
+        cardInfoEl.appendChild(cardWindowButton);
         divEl.appendChild(cardPicturesEl);
         divEl.appendChild(cardInfoEl);
 
@@ -82,16 +86,13 @@ window.addEventListener('load', function() {
             } else {
                 el.src = el.dataset.frontImage;
             }
+        } else if(el.tagName === 'BUTTON') {
+            const cardDiv = el.parentElement.parentElement;
+            const imgE = cardDiv.getElementsByTagName('IMG')[0];
+            const imageLink = imgE.src;
+            window.open(imageLink);
         }
     });
-
-    /*const openImageInWindow = () => {
-        event.stopPropagation();
-        const el = event.target;
-        if(el.tagName === 'IMG') {
-            window.open(el.src);
-        }
-    }*/
 
     cardsContainerEl.addEventListener('change', function(event) {
         event.stopPropagation();
