@@ -28,7 +28,7 @@ class GradedCard extends Card {
     }
 
     toString() {
-        return super.toString() + ` ${this.gradingCompany} ${this.grade} certification number: ${this.certificationNumber}`;
+        return super.toString() + `\n ${this.gradingCompany} ${this.grade} certification number: ${this.certificationNumber}`;
     }
 
     static castToGradedCard(card) {
