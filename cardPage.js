@@ -24,14 +24,14 @@ window.addEventListener('load', function() {
     }
 
     const createCardEl = function(currentCard) {
-        const frontImageEl = document.createElement('img');
-        const backImageEl = document.createElement('img');
+        const cardImageEl = document.createElement('img');
         const cardPicturesEl = document.createElement('div');
         const cardInfoEl = document.createElement('div');
         cardInfoEl.classList.add('div-card-info');
         cardPicturesEl.classList.add('div-card-images');
-        cardPicturesEl.appendChild(frontImageEl);
-        cardPicturesEl.appendChild(backImageEl);
+        cardPicturesEl.appendChild(cardImageEl);
+        cardImageEl.dataset.frontImage = currentCard.frontCardImageLink;
+        cardImageEl.dataset.backImage = currentCard.backCardImageLink;
         const divEl = document.createElement('div');
         divEl.setAttribute('data-cert', `${currentCard.certificationNumber}`);
         divEl.setAttribute('data-year', `${currentCard.year}`);
@@ -48,8 +48,7 @@ window.addEventListener('load', function() {
         soldCheckBoxLabel.innerText = 'Sold';
         soldCheckBox.setAttribute('type', 'checkbox');
         pEl.innerText = currentCard.toString();
-        frontImageEl.src = currentCard.frontCardImageLink;
-        backImageEl.src = currentCard.backCardImageLink;
+        cardImageEl.src = currentCard.frontCardImageLink;
         cardInfoEl.appendChild(pEl);
         cardInfoEl.appendChild(soldCheckBoxLabel);
         cardInfoEl.appendChild(soldCheckBox);
@@ -78,9 +77,21 @@ window.addEventListener('load', function() {
         event.stopPropagation();
         const el = event.target;
         if(el.tagName === 'IMG') {
-            window.open(el.src);
+            if(el.src === el.dataset.frontImage) {
+                el.src = el.dataset.backImage;
+            } else {
+                el.src = el.dataset.frontImage;
+            }
         }
     });
+
+    /*const openImageInWindow = () => {
+        event.stopPropagation();
+        const el = event.target;
+        if(el.tagName === 'IMG') {
+            window.open(el.src);
+        }
+    }*/
 
     cardsContainerEl.addEventListener('change', function(event) {
         event.stopPropagation();
